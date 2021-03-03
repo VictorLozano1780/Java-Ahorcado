@@ -4,33 +4,40 @@
 package appGrafica;
 
 
+import java.awt.Color;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JToggleButton;
 import javax.swing.border.EmptyBorder;
+import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.Font;
 import java.awt.Image;
 
 import javax.swing.JLabel;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import javax.swing.JMenuBar;
+import javax.swing.JList;
 import javax.swing.JMenu;
+import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
-import javax.swing.JRadioButton;
-import java.awt.Color;
-import javax.swing.JToggleButton;
+
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 /**
  * @author Víctor Lozano
  *
  */
 public class Pantalla extends JFrame {
-
+	
+	//ACTUALIZADO - VICTOR
+	static int foto = 1;
+	static String palabra;
+	static JLabel palabraSecreta;
+	static JLabel imagenLabel;
 	private JPanel contentPane;
 
 	/**
@@ -52,16 +59,26 @@ public class Pantalla extends JFrame {
 	/**
 	 * Create the frame.
 	 */
+	
+	//PANTALLA
 	public Pantalla() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 600, 600);
+		//COPIADO DE VICTOR
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
 		
+		
+		// SECCION DE MENUS - CESAR
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
 		
 		JMenu NewMenuJuego = new JMenu("Juego");
 		menuBar.add(NewMenuJuego);
 		
+		//LOGICA MENU SALIR - CESAR
 		JMenuItem MenuItemSalir = new JMenuItem("Salir");
 		MenuItemSalir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -71,12 +88,14 @@ public class Pantalla extends JFrame {
 		});
 		NewMenuJuego.add(MenuItemSalir);
 		
+		
 		JMenuItem MenuItemNuevoJuego = new JMenuItem("Nuevo Juego");
 		NewMenuJuego.add(MenuItemNuevoJuego);
 		
 		JMenu NewMenuAyuda1 = new JMenu("Ayuda");
 		menuBar.add(NewMenuAyuda1);
 		
+		//LOGICA MENU COMO JUGAR - CESAR
 		JMenuItem MenuItemComoJugar = new JMenuItem("Como jugar");
 		MenuItemComoJugar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -93,10 +112,12 @@ public class Pantalla extends JFrame {
 		});
 		NewMenuAyuda1.add(MenuItemComoJugar);
 		
+		//LOGICA MENU 'ACERCA DE' - CESAR
 		JMenuItem MenuItemAcercaDe = new JMenuItem("acerca de ");
 		MenuItemAcercaDe.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showMessageDialog(null,"Juego del Ahorcado creado en Java con Swing y AWT \n \nCreadores: \nVictor Lozano, Cesar Torrelles, Giovanny");
+				JOptionPane.showMessageDialog(null,"Juego del Ahorcado creado en Java con Swing y AWT "
+						+ "\n \nCreadores: \nVictor Lozano, Cesar Torrelles, Giovanny");
 				
 			}
 		});
@@ -106,143 +127,145 @@ public class Pantalla extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JPanel tecladoPanel = new JPanel();
+		
+		//JPANELS TECLADO Y BOTONES
+		//COPIADO
+		final JPanel tecladoPanel = new JPanel();
 		tecladoPanel.setBounds(10, 361, 221, 189);
 		tecladoPanel.setToolTipText("Teclado");
 		contentPane.add(tecladoPanel);
 		tecladoPanel.setLayout(null);
-		
-		JButton btnA = new JButton("A");
+
+		final JButton btnA = new JButton("A");
 		btnA.setBounds(0, 0, 39, 39);
 		tecladoPanel.add(btnA);
-		
-		JButton btnB = new JButton("B");
+
+		final JButton btnB = new JButton("B");
 		btnB.setBounds(38, 0, 39, 39);
 		tecladoPanel.add(btnB);
-		
-		JButton btnC = new JButton("C");
+
+		final JButton btnC = new JButton("C");
 		btnC.setBounds(74, 0, 39, 39);
 		tecladoPanel.add(btnC);
-		
-		JButton btnD = new JButton("D");
+
+		final JButton btnD = new JButton("D");
 		btnD.setBounds(110, 0, 39, 39);
 		tecladoPanel.add(btnD);
-		
-		JButton btnE = new JButton("E");
+
+		final JButton btnE = new JButton("E");
 		btnE.setBounds(147, 0, 39, 39);
 		tecladoPanel.add(btnE);
-		
-		JButton btnF = new JButton("F");
+
+		final JButton btnF = new JButton("F");
 		btnF.setBounds(183, 0, 39, 39);
 		tecladoPanel.add(btnF);
-		
-		JButton btnG = new JButton("G");
+
+		final JButton btnG = new JButton("G");
 		btnG.setBounds(0, 40, 39, 39);
 		tecladoPanel.add(btnG);
-		
-		JButton btnH = new JButton("H");
+
+		final JButton btnH = new JButton("H");
 		btnH.setBounds(38, 40, 39, 39);
 		tecladoPanel.add(btnH);
-		
-		JButton btnI = new JButton("I");
+
+		final JButton btnI = new JButton("I");
 		btnI.setBounds(74, 40, 39, 39);
 		tecladoPanel.add(btnI);
-		
-		JButton btnJ = new JButton("J");
+
+		final JButton btnJ = new JButton("J");
 		btnJ.setBounds(110, 40, 39, 39);
 		tecladoPanel.add(btnJ);
-		
-		JButton btnK = new JButton("K");
+
+		final JButton btnK = new JButton("K");
 		btnK.setBounds(147, 40, 39, 39);
 		tecladoPanel.add(btnK);
-		
-		JButton btnL = new JButton("L");
+
+		final JButton btnL = new JButton("L");
 		btnL.setBounds(183, 40, 39, 39);
 		tecladoPanel.add(btnL);
-		
-		JButton btnM = new JButton("M");
+
+		final JButton btnM = new JButton("M");
 		btnM.setBounds(0, 78, 39, 39);
 		btnM.setFont(new Font("Arial", Font.PLAIN, 9));
 		tecladoPanel.add(btnM);
-		
-		JButton btnN = new JButton("N");
+
+		final JButton btnN = new JButton("N");
 		btnN.setBounds(38, 78, 39, 39);
 		tecladoPanel.add(btnN);
-		
-		JButton btnÑ = new JButton("Ñ");
+
+		final JButton btnÑ = new JButton("Ñ");
 		btnÑ.setBounds(74, 78, 39, 39);
 		tecladoPanel.add(btnÑ);
-		
-		JButton btnO = new JButton("O");
+
+		final JButton btnO = new JButton("O");
 		btnO.setBounds(110, 78, 39, 39);
 		btnO.setFont(new Font("Arial", Font.PLAIN, 9));
 		tecladoPanel.add(btnO);
-		
-		JButton btnP = new JButton("P");
+
+		final JButton btnP = new JButton("P");
 		btnP.setBounds(147, 78, 39, 39);
 		tecladoPanel.add(btnP);
-		
-		JButton btnQ = new JButton("Q");
+
+		final JButton btnQ = new JButton("Q");
 		btnQ.setBounds(183, 78, 39, 39);
 		btnQ.setFont(new Font("Arial", Font.PLAIN, 9));
 		tecladoPanel.add(btnQ);
-		
-		JButton btnR = new JButton("R");
+
+		final JButton btnR = new JButton("R");
 		btnR.setBounds(0, 116, 39, 39);
 		tecladoPanel.add(btnR);
-		
-		JButton btnS = new JButton("S");
+
+		final JButton btnS = new JButton("S");
 		btnS.setBounds(38, 116, 39, 39);
 		tecladoPanel.add(btnS);
-		
-		JButton btnT = new JButton("T");
+
+		final JButton btnT = new JButton("T");
 		btnT.setBounds(74, 116, 39, 39);
 		tecladoPanel.add(btnT);
-		
-		JButton btnU = new JButton("U");
+
+		final JButton btnU = new JButton("U");
 		btnU.setBounds(110, 116, 39, 39);
 		tecladoPanel.add(btnU);
-		
-		JButton btnV = new JButton("V");
+
+		final JButton btnV = new JButton("V");
 		btnV.setBounds(147, 116, 39, 39);
 		tecladoPanel.add(btnV);
-		
-		JButton btnW = new JButton("W");
-		btnW.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
+
+		final JButton btnW = new JButton("W");
 		btnW.setBounds(183, 116, 39, 39);
 		btnW.setFont(new Font("Arial", Font.PLAIN, 8));
 		tecladoPanel.add(btnW);
-		
-		JButton btnX = new JButton("X");
+
+		final JButton btnX = new JButton("X");
 		btnX.setBounds(61, 150, 39, 39);
 		tecladoPanel.add(btnX);
-		
-		JButton btnY = new JButton("Y");
+
+		final JButton btnY = new JButton("Y");
 		btnY.setBounds(98, 150, 39, 39);
 		tecladoPanel.add(btnY);
-		
-		JButton btnZ = new JButton("Z");
+
+		final JButton btnZ = new JButton("Z");
 		btnZ.setBounds(134, 150, 39, 39);
 		tecladoPanel.add(btnZ);
 		
-		JPanel pistasPanel = new JPanel();
+		//PANEL DE PISTAS - VICTOR
+		final JPanel pistasPanel = new JPanel();
 		pistasPanel.setBounds(10, 182, 221, 158);
 		contentPane.add(pistasPanel);
 		pistasPanel.setLayout(null);
 		
+		//PANEL PALABRA SECRETA - VICTOR
 		JPanel palabraSecretaPanel = new JPanel();
 		palabraSecretaPanel.setBounds(10, 93, 201, 54);
 		pistasPanel.add(palabraSecretaPanel);
 		palabraSecretaPanel.setLayout(null);
 		
-		JLabel palabraSecreta = new JLabel("_ _ _ _ _ _ _ _ _ _ _ ");
+		palabraSecreta = new JLabel("");
 		palabraSecreta.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		palabraSecreta.setBounds(10, 11, 181, 32);
 		palabraSecretaPanel.add(palabraSecreta);
 		
+		//VIDAS PANEL - CESAR
 		JPanel vidasPanel = new JPanel();
 		vidasPanel.setBounds(10, 6, 205, 75);
 		pistasPanel.add(vidasPanel);
@@ -276,33 +299,139 @@ public class Pantalla extends JFrame {
 		vida5.setForeground(Color.RED);
 		vida5.setBackground(Color.RED);
 		vida5.setBounds(118, 47, 44, 22);
-		vidasPanel.add(vida5);
+		vidasPanel.add(vida5);	
+		//HASTA AQUI LAS VIDAS
 		
+		
+		//MENU PANEL - VICTOR - MODIFICADO POR CESAR LAS DIMENSIONES
 		JPanel menuPanel = new JPanel();
 		menuPanel.setBounds(10, 32, 221, 137);
 		contentPane.add(menuPanel);
 		menuPanel.setLayout(null);
 		
-		JButton btnIniciarJuego = new JButton("Iniciar juego");
-		btnIniciarJuego.setBounds(10, 11, 201, 55);
-		menuPanel.add(btnIniciarJuego);
 		
+		//BOTON PISTA, (MODIFICADO DE 'btnResolver')
 		JButton btnPista = new JButton("Pista");
 		btnPista.setBounds(10, 77, 201, 55);
 		menuPanel.add(btnPista);
 		
-		JPanel imagenesPanel = new JPanel();
+		//BOTON imagenesPanel, dimensiones modificadas por CESAR
+		final JPanel imagenesPanel = new JPanel();
 		imagenesPanel.setBounds(241, 31, 333, 519);
 		contentPane.add(imagenesPanel);
 		imagenesPanel.setLayout(null);
 		
-		JLabel imagenLabel = new JLabel("");
-		ImageIcon img = new ImageIcon(Pantalla.class.getResource("/Imagenes/Vida10.jpg"));
+		
+		// imagenlABEL - VICTOR
+		imagenLabel = new JLabel();
+		elegirImagen(foto);
+		imagenLabel.setBounds(10, 11, 313, 517);
+		imagenesPanel.add(imagenLabel);
+		
+		
+		//JLIST DE PALABRAS PARA ACERTAR - VICTOR
+		
+		JList<String> list = new JList<String>();
+		final DefaultListModel<String> listaDiez = new DefaultListModel<String>();
+		listaDiez.addElement("TARRAGONA");
+		listaDiez.addElement("BARCELONA");
+		listaDiez.addElement("LLEIDA");
+		listaDiez.addElement("GIRONA");
+		listaDiez.addElement("FUTBOL");
+		listaDiez.addElement("BALONCESTO");
+		listaDiez.addElement("MACARRONES");
+		listaDiez.addElement("ALBONDIGAS");
+		listaDiez.addElement("TECLADO");
+		list.setModel(listaDiez);
+		list.setVisible(false);
+		list.setBounds(10, 170, 1, 1);
+		contentPane.add(list);
+
+		tecladoPanel.setVisible(false);
+		imagenesPanel.setVisible(false);
+		pistasPanel.setVisible(false);
+		
+
+		//CREACION Y LOGICA DEL BOTON DE INICIO DE JUEGO - VICTOR
+		
+		JButton btnIniciarJuego = new JButton("Iniciar juego");
+		btnIniciarJuego.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				palabraSecreta.setText("");
+				tecladoPanel.setVisible(true);
+				imagenesPanel.setVisible(true);
+				pistasPanel.setVisible(true);
+				int random = (int) (Math.random() * listaDiez.getSize());
+				palabra = listaDiez.get(random);
+				for (int i = 0; i < palabra.length(); i++) {
+					palabraSecreta.setText(palabraSecreta.getText() + " _");
+				}
+				btnA.addActionListener(new BotonPulsado());
+				btnB.addActionListener(new BotonPulsado());
+				btnC.addActionListener(new BotonPulsado());
+				btnD.addActionListener(new BotonPulsado());
+				btnE.addActionListener(new BotonPulsado());
+				btnF.addActionListener(new BotonPulsado());
+				btnG.addActionListener(new BotonPulsado());
+				btnH.addActionListener(new BotonPulsado());
+				btnI.addActionListener(new BotonPulsado());
+				btnJ.addActionListener(new BotonPulsado());
+				btnK.addActionListener(new BotonPulsado());
+				btnL.addActionListener(new BotonPulsado());
+				btnM.addActionListener(new BotonPulsado());
+				btnN.addActionListener(new BotonPulsado());
+				btnÑ.addActionListener(new BotonPulsado());
+				btnO.addActionListener(new BotonPulsado());
+				btnP.addActionListener(new BotonPulsado());
+				btnQ.addActionListener(new BotonPulsado());
+				btnR.addActionListener(new BotonPulsado());
+				btnS.addActionListener(new BotonPulsado());
+				btnT.addActionListener(new BotonPulsado());
+				btnU.addActionListener(new BotonPulsado());
+				btnV.addActionListener(new BotonPulsado());
+				btnW.addActionListener(new BotonPulsado());
+				btnX.addActionListener(new BotonPulsado());
+				btnY.addActionListener(new BotonPulsado());
+				btnZ.addActionListener(new BotonPulsado());
+			}
+			
+
+		});
+		btnIniciarJuego.setBounds(10, 11, 201, 55);
+		menuPanel.add(btnIniciarJuego);
+	}
+
+	//METODO ELECCION DE IMAGEN - VICTOR
+	public void elegirImagen(int numero) {
+		System.out.println(numero);
+		ImageIcon img = new ImageIcon(Pantalla.class.getResource("/Imagenes/Imagen" + numero + ".png"));
 		Image imagen = img.getImage();
 		Image newSize = imagen.getScaledInstance(440, 400, Image.SCALE_SMOOTH);
 		img = new ImageIcon(newSize);
 		imagenLabel.setIcon(img);
-		imagenLabel.setBounds(6, 0, 313, 517);
-		imagenesPanel.add(imagenLabel);
+		imagenLabel.repaint();
+
 	}
-}
+	
+	
+	//METODO PARA COMPROBAR LA LETRA - VICTOR
+	public void compruebaLetra(String letra) {
+		palabraSecreta.setText("");
+		boolean esta = false;
+		for (int j = 0; j < palabra.length(); j++) {
+			if (palabra.charAt(j) == letra.charAt(0)) {
+				palabraSecreta.setText(palabraSecreta.getText() + " " + letra);
+				esta = true;
+			} else {
+				palabraSecreta.setText(palabraSecreta.getText() + " _");
+			}
+		}
+		if (!esta) {
+			foto++;
+			elegirImagen(foto);
+		}
+		System.out.println(palabra);
+		System.out.println(palabraSecreta.getText());
+	}
+	}
+
