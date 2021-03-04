@@ -16,7 +16,10 @@ import java.awt.Image;
 
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
+
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.ActionEvent;
@@ -68,6 +71,9 @@ public class Pantalla extends JFrame {
 	private static JList<String> list;
 	private static DefaultListModel<String> listaDiez;
 	private static JButton btnIniciarJuego;
+	//@giorocor crear array y variable nivel
+	private static String[] niveles= {"Principiante","Medio","Avanzado"};
+	private static String nivel;
 
 	/**
 	 * Launch the application.
@@ -79,6 +85,10 @@ public class Pantalla extends JFrame {
 					Pantalla frame = new Pantalla();
 					btnIniciarJuego.addActionListener(new ActionListener() {
 						public void actionPerformed(ActionEvent e) {
+							//@giorocor  invocar menu de niveles
+							nivel=menuDesplegable(niveles,"Elige un nivel");
+							nivel(nivel);
+							
 							palabraSecreta.setText("");
 							tecladoPanel.setVisible(true);
 							imagenesPanel.setVisible(true);
@@ -90,6 +100,11 @@ public class Pantalla extends JFrame {
 							for (int i = 0; i < palabra.length(); i++) {
 								palabraSecreta.setText(palabraSecreta.getText() + " _");
 							}
+							
+							
+							
+
+						
 						}
 					});
 					ActionListener click = new ActionListener() {
@@ -100,6 +115,7 @@ public class Pantalla extends JFrame {
 							letra = boton.getText();
 							System.out.println(letra);
 							compruebaLetra(letra);
+							
 						}
 					};
 					btnA.addActionListener(click);
@@ -343,8 +359,7 @@ public class Pantalla extends JFrame {
 			if (palabra.charAt(j) == letra.charAt(0)) {		//Si es correcta escribela
 				resultado = resultado + " " + letra;
 				esta = true;
-			} else if(palabraSecreta.getText().charAt(j)) {
-				
+			
 			} else {
 				resultado = resultado + " _";
 			}
@@ -357,4 +372,35 @@ public class Pantalla extends JFrame {
 		System.out.println(palabra);
 		System.out.println(palabraSecreta.getText());
 	}
+	
+	//@giorocor para crear menu de eleccion
+	private static String menuDesplegable(String[] opciones, String texto) {
+		Object opcion = JOptionPane.showInputDialog(null, texto, "Elegir", JOptionPane.QUESTION_MESSAGE, null, opciones,
+				opciones[0]);
+		return (String) opcion;
+	}
+	
+	
+	//@giorocor Elige el tipo de imagen de acuerdo a la dificultad elegida por el usuario
+	public static void nivel(String level) {
+		switch(level) {
+		case "Principiante":
+			foto=1;
+			elegirImagen(foto);
+			System.out.println(1);
+			break;
+		case "Medio":
+			foto=2;
+			elegirImagen(foto);
+			System.out.println(2);
+			break;
+		case "Avanzado":
+			foto=4;
+			elegirImagen(foto);
+			System.out.println(3);
+			break;
+		}
+	}
+	
+	
 }
