@@ -71,10 +71,12 @@ public class Pantalla extends JFrame {
 	private static JList<String> list;
 	private static DefaultListModel<String> listaDiez;
 	private static JButton btnIniciarJuego;
-	//@giorocor crear array y variable nivel
+	//13@giorocor crear array y variable nivel
 	private static String[] niveles= {"Principiante","Medio","Avanzado"};
 	private static String nivel;
-
+	//16 @giorocor crear opciones de input pista
+	private static String[] eleccionPista= {"No","Si"};
+	private static int pista=0;
 	/**
 	 * Launch the application.
 	 */
@@ -85,7 +87,7 @@ public class Pantalla extends JFrame {
 					Pantalla frame = new Pantalla();
 					btnIniciarJuego.addActionListener(new ActionListener() {
 						public void actionPerformed(ActionEvent e) {
-							//@giorocor  invocar menu de niveles
+							//13 @giorocor  invocar menu de niveles
 							nivel=menuDesplegable(niveles,"Elige un nivel");
 							nivel(nivel);
 							
@@ -302,9 +304,24 @@ public class Pantalla extends JFrame {
 		contentPane.add(menuPanel);
 		menuPanel.setLayout(null);
 
-		btnResolver = new JButton("Resolver");
+		btnResolver = new JButton("Pista");
 		btnResolver.setBounds(10, 77, 201, 55);
 		menuPanel.add(btnResolver);
+		//16 @giorocor agrega evento click para dar pista
+		btnResolver.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				//16Al dar la pista se consume una vida del ahorcado
+				if(pista==0) {
+				pista=darOpciones(eleccionPista, "ADVERTENCIA: ¿Deseas perder una vida a cambio de una pista? ");
+				foto=foto+pista;
+				elegirImagen(foto);
+				}else {
+				//16 si ya se ha consumido las ayudas aparecera este mensaje
+					JOptionPane.showMessageDialog(null, "No hay mas ayudas disponibles");
+				}
+			}
+		});
 
 		imagenesPanel = new JPanel();
 		imagenesPanel.setBounds(241, 11, 333, 539);
@@ -337,7 +354,7 @@ public class Pantalla extends JFrame {
 		menuPanel.add(btnIniciarJuego);
 		tecladoPanel.setVisible(false);
 		imagenesPanel.setVisible(false);
-		pistasPanel.setVisible(false);
+		pistasPanel.setVisible(true);
 
 	}
 
@@ -368,12 +385,16 @@ public class Pantalla extends JFrame {
 		if (!esta) {
 			foto++;
 			elegirImagen(foto);
+			//16 @giorocor oculta boton de pista en la ultima vida
+			if(foto==9) {
+				btnResolver.setVisible(false);
+			}
 		}
 		System.out.println(palabra);
 		System.out.println(palabraSecreta.getText());
 	}
 	
-	//@giorocor para crear menu de eleccion
+	//13 @giorocor para crear menu de eleccion
 	private static String menuDesplegable(String[] opciones, String texto) {
 		Object opcion = JOptionPane.showInputDialog(null, texto, "Elegir", JOptionPane.QUESTION_MESSAGE, null, opciones,
 				opciones[0]);
@@ -381,7 +402,7 @@ public class Pantalla extends JFrame {
 	}
 	
 	
-	//@giorocor Elige el tipo de imagen de acuerdo a la dificultad elegida por el usuario
+	//13 @giorocor Elige el tipo de imagen de acuerdo a la dificultad elegida por el usuario
 	public static void nivel(String level) {
 		switch(level) {
 		case "Principiante":
@@ -400,6 +421,13 @@ public class Pantalla extends JFrame {
 			System.out.println(3);
 			break;
 		}
+	}
+	
+	//16 @giorocor Cuadro de opcion SI o NO
+	public static int darOpciones(String[] opciones, String textoOpciones) {
+		int opcion = JOptionPane.showOptionDialog(null, textoOpciones, "Selector de opciones",
+				JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, opciones, opciones[0]);
+		return opcion;
 	}
 	
 	
